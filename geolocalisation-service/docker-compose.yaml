@@ -1,0 +1,29 @@
+#services:
+#
+#  redis:
+#    image: 'redis:latest'
+#    ports:
+#      - '6379:6379'
+#    volumes:
+#      - redis_data:/data
+#    networks:
+#      - geolocalisation-network
+#
+#  geolocation-service:
+#    image: 'ritasensei/geolocalisation-service:latest'
+#    ports:
+#      - '8082:8082'
+#    depends_on:
+#      - redis
+#    networks:
+#      - geolocalisation-network
+#    environment:
+#      - SPRING_REDIS_HOST=redis
+#      - SPRING_REDIS_PORT=6379
+#
+#networks:
+#  geolocalisation-network:
+#        driver: bridge
+#
+#volumes:
+#    redis_data:
