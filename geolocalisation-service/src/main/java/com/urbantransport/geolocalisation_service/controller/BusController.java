@@ -5,6 +5,7 @@ import com.urbantransport.geolocalisation_service.model.Status;
 import com.urbantransport.geolocalisation_service.service.BusService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,11 +29,13 @@ public class BusController {
     }
 
     @GetMapping("/{busId}")
+    @Cacheable(value = "busLocations", key = "#busId")
     public ResponseEntity<List<Bus>> getLocationsByBusId(@PathVariable String busId) {
         return ResponseEntity.ok(busService.getLocationsByBusId(busId));
     }
 
     @GetMapping("/current/{busId}")
+    @Cacheable(value = "currentBusLocation", key = "#busId",unless = "#result == null")
     public ResponseEntity<Bus> getCurrentLocation(@PathVariable String busId) {
         return ResponseEntity.of(busService.getCurrentLocation(busId));
     }

@@ -44,4 +44,8 @@ public class BusService {
     public List<Bus> getAllBusesOrderedByTimestamp() {
         return busRepository.findAllByOrderByTimestampDesc();
     }
+
+    public void clearCache() {
+        busRepository.deleteAll();
+    }
 }
