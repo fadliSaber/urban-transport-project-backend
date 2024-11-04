@@ -3,7 +3,6 @@ package com.urbantransport.geolocalisation_service.controller;
 import com.urbantransport.geolocalisation_service.model.Bus;
 import com.urbantransport.geolocalisation_service.model.Status;
 import com.urbantransport.geolocalisation_service.service.BusService;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
