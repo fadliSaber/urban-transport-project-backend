@@ -1,8 +1,18 @@
 services:
   cassandra:
-    image: 'cassandra:latest'
-    environment:
-      - 'CASSANDRA_DC=dc1'
-      - 'CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch'
+    image: cassandra:latest
+    container_name: cassandra-container
     ports:
-      - '9042'
+      - "9042:9042"
+    environment:
+      - CASSANDRA_LISTEN_ADDRESS=auto  
+      - CASSANDRA_CLUSTER_NAME=my-cluster
+      - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
+      - CASSANDRA_DC=my-datacenter-1
+      - CASSANDRA_USER=admin
+      - CASSANDRA_PASSWORD=admin
+    volumes:
+      - cassandra-data:/var/lib/cassandra
+
+volumes:
+  cassandra-data:
