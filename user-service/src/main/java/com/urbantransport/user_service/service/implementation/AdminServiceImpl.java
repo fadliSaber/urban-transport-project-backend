@@ -1,13 +1,12 @@
 package com.urbantransport.user_service.service.implementation;
 
-import com.urbantransport.user_service.auth.AuthenticationResponse;
-import com.urbantransport.user_service.config.JwtService;
 import com.urbantransport.user_service.exception.NotFoundException;
 import com.urbantransport.user_service.model.Admin;
 import com.urbantransport.user_service.repository.AdminRepository;
 import com.urbantransport.user_service.service.AdminService;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,16 +14,11 @@ import org.springframework.stereotype.Service;
 public class AdminServiceImpl implements AdminService {
 
   private final AdminRepository adminRepository;
-  private final JwtService jwtService;
+  private final PasswordEncoder passwordEncoder;
 
   @Override
   public List<Admin> getAll() {
     return adminRepository.findAll();
-  }
-
-  @Override
-  public Admin addAdmin(Admin admin) {
-    return adminRepository.save(admin);
   }
 
   @Override
@@ -38,6 +32,7 @@ public class AdminServiceImpl implements AdminService {
     oldadmin.setEmail(newadmin.getEmail());
     oldadmin.setFirstName(newadmin.getFirstName());
     oldadmin.setLastName(newadmin.getLastName());
+    oldadmin.setPassword(passwordEncoder.encode(newadmin.getPassword()));
     return adminRepository.save(oldadmin);
   }
 
@@ -53,19 +48,6 @@ public class AdminServiceImpl implements AdminService {
       .orElseThrow(() ->
         new NotFoundException("Admin with id " + id + " not found")
       );
-  }
-
-  @Override
-  public AuthenticationResponse updateAdminEmail(String id, String email) {
-    Admin admin = adminRepository
-      .findById(id)
-      .orElseThrow(() ->
-        new NotFoundException("Admin with id " + id + " not found")
-      );
-    admin.setEmail(email);
-    adminRepository.save(admin);
-    var jwtToken = jwtService.generateToken(admin);
-    return AuthenticationResponse.builder().token(jwtToken).build();
   }
 
   @Override

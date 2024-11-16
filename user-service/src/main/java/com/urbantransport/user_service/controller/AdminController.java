@@ -1,8 +1,5 @@
 package com.urbantransport.user_service.controller;
 
-import com.urbantransport.user_service.auth.AuthenticationRequest;
-import com.urbantransport.user_service.auth.AuthenticationResponse;
-import com.urbantransport.user_service.auth.AuthenticationService;
 import com.urbantransport.user_service.model.Admin;
 import com.urbantransport.user_service.service.AdminService;
 import java.nio.file.AccessDeniedException;
@@ -13,11 +10,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,18 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
 
   private final AdminService adminService;
-  private final AuthenticationService authenticationService;
 
-  // @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
   @GetMapping("/admins")
   List<Admin> getAllAdmins() throws AccessDeniedException {
     return adminService.getAll();
-  }
-
-  // @PreAuthorize("hasRole('ROLE_ADMIN')")
-  @PostMapping("/addadmin")
-  Admin addAdmin(@RequestBody Admin admin) throws AccessDeniedException {
-    return adminService.addAdmin(admin);
   }
 
   @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -55,7 +43,7 @@ public class AdminController {
   }
 
   @PreAuthorize("hasRole('ROLE_ADMIN')")
-  @GetMapping("/admin/{id}")
+  @GetMapping("/getadmin/{id}")
   Admin getAdmin(@PathVariable String id) throws AccessDeniedException {
     return adminService.getAdmin(id);
   }
@@ -64,22 +52,5 @@ public class AdminController {
   @GetMapping("/{email}")
   Admin getAdminByEmail(@PathVariable String email) {
     return adminService.getAdminByEmail(email);
-  }
-
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
-  @PutMapping("/upemail/{id}")
-  AuthenticationResponse updateAdminEmail(
-    @PathVariable String id,
-    @RequestParam String email
-  ) {
-    return adminService.updateAdminEmail(id, email);
-  }
-
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
-  @PutMapping("/uppassword")
-  AuthenticationResponse updateAdminPassword(
-    @RequestBody AuthenticationRequest password
-  ) {
-    return authenticationService.changePassword(password);
   }
 }

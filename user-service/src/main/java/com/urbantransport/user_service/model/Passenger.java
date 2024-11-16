@@ -1,5 +1,6 @@
 package com.urbantransport.user_service.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.time.Instant;
 import java.util.Collection;
 import java.util.List;
@@ -17,7 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 @AllArgsConstructor
 @Builder
 @Data
-@Document(collection = "admin")
+@Document(collection = "passenger")
 public class Passenger implements UserDetails {
 
   @Id
@@ -36,8 +37,14 @@ public class Passenger implements UserDetails {
 
   private Instant createdAt;
 
+  private boolean isVerified;
+
+  @JsonManagedReference
+  private List<SecureToken> tokens;
+
   protected void onCreate() {
     createdAt = Instant.now();
+    isVerified = false;
   }
 
   @Override

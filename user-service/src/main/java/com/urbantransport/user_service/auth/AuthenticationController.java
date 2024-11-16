@@ -1,5 +1,6 @@
 package com.urbantransport.user_service.auth;
 
+import com.urbantransport.user_service.service.PassengerService;
 import jakarta.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
   private final AuthenticationService service;
+  private final PassengerService passengerService;
 
   @PostMapping("/register/admin")
   @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -25,6 +28,14 @@ public class AuthenticationController {
     @RequestBody RegisterUser request
   ) {
     return ResponseEntity.ok(service.registerAdmin(request));
+  }
+
+  @PostMapping("/register/passenger")
+  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  public ResponseEntity<AuthenticationResponse> registerPassenger(
+    @RequestBody RegisterUser request
+  ) {
+    return ResponseEntity.ok(service.registerPassenger(request));
   }
 
   @PostMapping("/authenticate")
@@ -35,11 +46,11 @@ public class AuthenticationController {
   }
 
   @PostMapping("/changePassword")
-  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_STUDENT', 'ROLE_CLUB')")
+  @PreAuthorize("hasRole('ROLE_PASSENGER')")
   public ResponseEntity<AuthenticationResponse> changePassword(
     @RequestBody AuthenticationRequest request
   ) {
-    return ResponseEntity.ok(service.changePassword(request));
+    return ResponseEntity.ok(passengerService.changePassword(request));
   }
 
   // @PostMapping("/forgotPassword")
@@ -53,5 +64,17 @@ public class AuthenticationController {
   public ResponseEntity<String> signUp(@RequestBody RegisterUser request)
     throws MessagingException, UnsupportedEncodingException {
     return service.signup(request);
+  }
+
+  @PostMapping("/register/verify")
+  public ResponseEntity<String> verifyPassanger(@RequestParam String token) {
+    return service.verifyPassenger(token);
+  }
+
+  @PostMapping("/refresh")
+  public AuthenticationResponse refreshToken(
+    @RequestParam String refreshToken
+  ) {
+    return service.refreshToken(refreshToken);
   }
 }

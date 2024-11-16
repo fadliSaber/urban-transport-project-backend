@@ -19,7 +19,7 @@ public class EmailService {
     MimeMessage message = javaMailSender.createMimeMessage();
 
     message.setFrom(
-      new InternetAddress("noreply@ims.ensias.com", "UniHive Corporation")
+      new InternetAddress("noreply@ims.ensias.com", "eTawsil Corporation")
     );
     message.setRecipients(
       MimeMessage.RecipientType.TO,
@@ -27,7 +27,7 @@ public class EmailService {
     );
     message.setSubject(subject);
 
-    String htmlContent = "<h1>UniHive Corporation</h1><p>" + text + "</p>";
+    String htmlContent = "<h1>eTawsil Corporation</h1><p>" + text + "</p>";
     message.setContent(htmlContent, "text/html");
     javaMailSender.send(message);
   }
