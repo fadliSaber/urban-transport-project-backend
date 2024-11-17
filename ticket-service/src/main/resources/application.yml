@@ -1,0 +1,27 @@
+server:
+    port: ${PORT:8080}
+    error:
+        include-message: always
+
+spring:
+    application:
+        name: ticket-service
+    datasource:
+        url: jdbc:postgresql://localhost:5432/tickets-db
+        username: postgres
+        password: ${DB_PASSWORD}
+        driverClassName: org.postgresql.Driver
+        hikari:
+            data-source-properties:
+                prepareThreshold: 0
+    jpa:
+        open-in-view: true
+        properties:
+            hibernate:
+            dialect: org.hibernate.dialect.PostgreSQLDialect
+            ddl-auto: update
+            show-sql: true
+
+stripe:
+    secret-key: ${STRIPE_SECRET_KEY}
+    public-key: ${STRIPE_PUBLIC_KEY}
