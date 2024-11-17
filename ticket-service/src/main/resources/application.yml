@@ -18,8 +18,8 @@ spring:
         open-in-view: true
         properties:
             hibernate:
-            dialect: org.hibernate.dialect.PostgreSQLDialect
-            ddl-auto: update
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+                ddl-auto: update
             show-sql: true
 
 stripe:
