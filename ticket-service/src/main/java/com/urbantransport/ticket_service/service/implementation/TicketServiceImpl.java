@@ -104,4 +104,18 @@ public class TicketServiceImpl implements TicketService {
     ticket.setPaymentStatus("SUCCESS");
     ticketRepository.save(ticket);
   }
+
+  @Override
+  public void cancelPurchase(String paymentIntentId) {
+    Ticket ticket = ticketRepository
+      .findByStripePaymentId(paymentIntentId)
+      .orElseThrow(() ->
+        new NotFoundException(
+          "Ticket not found for payment intent: " + paymentIntentId
+        )
+      );
+
+    ticket.setPaymentStatus("FAILED");
+    ticketRepository.save(ticket);
+  }
 }

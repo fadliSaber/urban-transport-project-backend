@@ -17,4 +17,6 @@ public interface TicketService {
   public void deleteTicket(UUID id);
 
   public void finalizePurchase(String paymentIntentId);
+
+  public void cancelPurchase(String paymentIntentId);
 }

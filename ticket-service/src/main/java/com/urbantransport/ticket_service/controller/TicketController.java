@@ -39,6 +39,14 @@ public class TicketController {
     return ResponseEntity.ok("Purchase finalized");
   }
 
+  @PostMapping("/cancel")
+  public ResponseEntity<String> cancelPurchase(
+    @RequestBody String paymentIntentId
+  ) {
+    ticketService.cancelPurchase(paymentIntentId);
+    return ResponseEntity.ok("Purchase canceled");
+  }
+
   @GetMapping("/getticket")
   public ResponseEntity<Ticket> getTicket(@RequestBody UUID id) {
     return ResponseEntity.ok(ticketService.getTicket(id));
