@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 
-@Service
+
 public class SubscriptionImpl implements SubscriptionService {
     private final SubscriptionRepository repository;
     @Autowired
