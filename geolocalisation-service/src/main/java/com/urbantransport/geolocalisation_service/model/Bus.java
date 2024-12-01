@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -23,6 +23,6 @@ public class Bus {
     private String busId;
     private double latitude;
     private double longitude;
-    private Date timestamp;
+    private LocalDateTime timestamp;
     private Status status;
 }

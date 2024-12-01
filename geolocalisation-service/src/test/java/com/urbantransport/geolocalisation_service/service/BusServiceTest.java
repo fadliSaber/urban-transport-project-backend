@@ -8,11 +8,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.RedisTemplate;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -21,17 +22,22 @@ class BusServiceTest {
 
     @Mock
     private BusRepository busRepository;
+    @Mock
+    private RedisTemplate<String, Object> redisTemplate;
+    @Mock
+    private HashOperations<String, Object, Object> hashOperations;
     @InjectMocks
     private BusService busService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
+        when(redisTemplate.opsForHash()).thenReturn(hashOperations);
     }
 
     @Test
     void saveLocation() {
-        Bus bus = new Bus(UUID.randomUUID(), "test_bus1", 34.0, -118.0, new Date(), Status.ACTIF);
+        Bus bus = new Bus(UUID.randomUUID(), "test_bus1", 34.0, -118.0, LocalDateTime.now(), Status.ACTIF);
         when(busRepository.save(bus)).thenReturn(bus);
 
         Bus result = busService.saveLocation(bus);
@@ -41,9 +47,26 @@ class BusServiceTest {
     }
 
     @Test
+    void getLocationById() {
+        UUID id = UUID.randomUUID(); // Unique ID for the test
+        String busId = "test_bus1";  // Example Bus ID
+        Bus bus = new Bus(id, busId, 34.0, -118.0, LocalDateTime.now(), Status.INACTIF);
+        // Mock repository behavior
+        when(busRepository.findById(id)).thenReturn(Optional.of(bus));
+        // Act
+        Optional<Bus> result = busService.getLocationById(id);
+        // Assert
+        assertTrue(result.isPresent()); // Ensure the result is present
+        assertEquals(bus, result.get()); // Check that the result matches the expected bus
+        verify(busRepository, times(1)).findById(id); // Verify the repository method was called once
+    }
+
+
+    @Test
     void getLocationsByBusId() {
-        String busId = "test_bus1";
-        List<Bus> busList = List.of(new Bus(UUID.randomUUID(), busId, 34.0, -118.0, new Date(), Status.ACTIF));
+        UUID id = UUID.randomUUID(); // Unique ID for the test
+        String busId = "test_bus1";  // Example Bus ID
+        List<Bus> busList = List.of(new Bus(id, busId, 34.0, -118.0, LocalDateTime.now(), Status.NON_OPERATIONEL));
         when(busRepository.findByBusId(busId)).thenReturn(busList);
 
         List<Bus> result = busService.getLocationsByBusId(busId);
@@ -55,19 +78,35 @@ class BusServiceTest {
     @Test
     void getCurrentLocation() {
         String busId = "test_bus1";
-        Bus latestBus = new Bus(UUID.randomUUID(), busId, 34.0, -118.0, new Date(), Status.ACTIF);
-        when(busRepository.findTopByBusIdOrderByTimestampDesc(busId)).thenReturn(Optional.of(latestBus));
+        UUID id = UUID.randomUUID();
+        String redisKey = "Bus:" + id;
+        Map<Object, Object> busData = Map.of(
+                "busId", busId,
+                "latitude", "34.0",
+                "longitude", "-118.0",
+                "timestamp", LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+                "status", "ACTIF"
+        );
+        // Mock RedisTemplate behavior
+        when(redisTemplate.keys("Bus:*")).thenReturn(Set.of(redisKey));
+        when(redisTemplate.opsForHash().entries(redisKey)).thenReturn(busData);
 
         Optional<Bus> result = busService.getCurrentLocation(busId);
 
-        assertEquals(Optional.of(latestBus), result);
-        verify(busRepository, times(1)).findTopByBusIdOrderByTimestampDesc(busId);
+        // Assert
+        assertTrue(result.isPresent());
+        assertEquals(busId, result.get().getBusId());
+        assertEquals(34.0, result.get().getLatitude());
+        assertEquals(-118.0, result.get().getLongitude());
+        assertEquals(Status.ACTIF, result.get().getStatus());
+        verify(redisTemplate, times(1)).keys("Bus:*");
+        verify(redisTemplate.opsForHash(), times(1)).entries(redisKey);
     }
 
     @Test
     void getBusesByStatus() {
         Status status = Status.ACTIF;
-        List<Bus> busList = List.of(new Bus(UUID.randomUUID(), "test_bus1", 34.0, -118.0, new Date(), status));
+        List<Bus> busList = List.of(new Bus(UUID.randomUUID(), "test_bus1", 34.0, -118.0, LocalDateTime.now(), status));
         when(busRepository.findByStatus(status)).thenReturn(busList);
 
         List<Bus> result = busService.getBusesByStatus(status);
@@ -78,8 +117,8 @@ class BusServiceTest {
 
     @Test
     void getLocationsAfter() {
-        Date timestamp = new Date();
-        List<Bus> busList = List.of(new Bus(UUID.randomUUID(), "test_bus1", 34.0, -118.0, new Date(), Status.ACTIF));
+        LocalDateTime timestamp = LocalDateTime.now();
+        List<Bus> busList = List.of(new Bus(UUID.randomUUID(), "test_bus1", 34.0, -118.0, LocalDateTime.now(), Status.ACTIF));
         when(busRepository.findByTimestampAfter(timestamp)).thenReturn(busList);
 
         List<Bus> result = busService.getLocationsAfter(timestamp);
@@ -90,7 +129,7 @@ class BusServiceTest {
 
     @Test
     void getAllBusesOrderedByTimestamp() {
-        List<Bus> busList = List.of(new Bus(UUID.randomUUID(), "test_bus1", 34.0, -118.0, new Date(), Status.ACTIF));
+        List<Bus> busList = List.of(new Bus(UUID.randomUUID(), "test_bus1", 34.0, -118.0, LocalDateTime.now(), Status.ACTIF));
         when(busRepository.findAllByOrderByTimestampDesc()).thenReturn(busList);
 
         List<Bus> result = busService.getAllBusesOrderedByTimestamp();
