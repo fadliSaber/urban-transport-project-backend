@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,26 +48,26 @@ public class TicketController {
     return ResponseEntity.ok("Purchase canceled");
   }
 
-  @GetMapping("/getticket")
-  public ResponseEntity<Ticket> getTicket(@RequestBody UUID id) {
+  @GetMapping("/getticket/{id}")
+  public ResponseEntity<Ticket> getTicket(@PathVariable UUID id) {
     return ResponseEntity.ok(ticketService.getTicket(id));
   }
 
-  @GetMapping("/alltickets")
+  @GetMapping("/tickets")
   public ResponseEntity<List<Ticket>> getAllTickets() {
     return ResponseEntity.ok(ticketService.getAllTickets());
   }
 
-  @PutMapping("/updateticket")
+  @PutMapping("/upticket/{id}")
   public ResponseEntity<Ticket> updateTicket(
-    @RequestBody UUID id,
+    @PathVariable UUID id,
     @RequestBody Ticket newticket
   ) {
     return ResponseEntity.ok(ticketService.updateTicket(id, newticket));
   }
 
-  @DeleteMapping("/deleteticket")
-  public ResponseEntity<String> deleteTicket(@RequestBody UUID id) {
+  @DeleteMapping("/delticket/{id}")
+  public ResponseEntity<String> deleteTicket(@PathVariable UUID id) {
     ticketService.deleteTicket(id);
     return ResponseEntity.ok("Ticket deleted");
   }

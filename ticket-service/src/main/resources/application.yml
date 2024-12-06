@@ -1,5 +1,5 @@
 server:
-    port: ${PORT:8080}
+    port: 8081
     error:
         include-message: always
 
@@ -15,11 +15,12 @@ spring:
             data-source-properties:
                 prepareThreshold: 0
     jpa:
+        hibernate:
+            ddl-auto: create
         open-in-view: true
         properties:
             hibernate:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
-                ddl-auto: create
             show-sql: true
 
 stripe:

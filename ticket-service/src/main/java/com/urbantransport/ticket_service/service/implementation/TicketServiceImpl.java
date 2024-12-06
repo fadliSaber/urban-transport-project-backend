@@ -29,7 +29,7 @@ public class TicketServiceImpl implements TicketService {
     newTicket.setPaymentStatus("PENDING");
     newTicket.setPurchaseDate(LocalDateTime.now());
 
-    Ticket savedTicket = ticketRepository.save(ticket);
+    Ticket savedTicket = ticketRepository.save(newTicket);
 
     String paymentIntentId = createPaymentIntent(ticket.getPrice())
       .getIntentId();
