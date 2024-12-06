@@ -38,7 +38,7 @@ public class PassengerController {
     return passengerService.updatePassenger(id, newpassenger);
   }
 
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PASSENGER')")
   @DeleteMapping("/delpassenger/{id}")
   void deletePassenger(@PathVariable String id) throws AccessDeniedException {
     passengerService.deletePassenger(id);

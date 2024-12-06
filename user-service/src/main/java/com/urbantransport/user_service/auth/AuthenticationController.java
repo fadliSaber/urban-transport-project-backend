@@ -23,7 +23,7 @@ public class AuthenticationController {
   private final PassengerService passengerService;
 
   @PostMapping("/register/admin")
-  @PreAuthorize("hasRole('ROLE_ADMIN')")
+  // @PreAuthorize("hasRole('ROLE_ADMIN')")
   public ResponseEntity<AuthenticationResponse> registerAdmin(
     @RequestBody RegisterUser request
   ) {

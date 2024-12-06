@@ -15,12 +15,16 @@ import jakarta.mail.MessagingException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
@@ -157,31 +161,111 @@ public class AuthenticationService {
       .get()
       .getToken();
 
+    if (passenger.isVerified()) {
+      return ResponseEntity.ok("Passenger already verified");
+    } else if (
+      passenger
+        .getTokens()
+        .stream()
+        .reduce((first, second) -> second)
+        .get()
+        .getExpiryDate()
+        .isBefore(LocalDateTime.now())
+    ) {
+      token = jwtService.generateToken(passenger);
+      var secureToken = SecureToken
+        .builder()
+        .token(token)
+        .passenger(passenger)
+        .expiryDate(LocalDateTime.now().plusHours(24))
+        .build();
+      secureTokenRepository.save(secureToken);
+      passenger.getTokens().add(secureToken);
+    }
+
     String url = UriComponentsBuilder
       .fromHttpUrl("http://localhost:8080")
       .path("/auth/register/verify")
       .queryParam("token", token)
       .toUriString();
 
-    emailService.sendEmail(
-      email,
-      "Email Verification",
-      "Please click the link (within 24 hours) below to confirm your registration: " +
-      url
-    );
+    String emailBody =
+      """
+        <div style="border: 1px solid #ccc; padding: 10px; font-family: Arial, sans-serif;">
+            <h1 style="color: #333;">eTawsil Corporation</h1>
+            <p style="color: #555;">Please click the link below (within 24 hours) to confirm your registration:</p>
+            <a href="%s" style="color: #1a73e8;">%s</a>
+            <p style="color: #555;">Note that after 7 days from the time of sending this email, if you are not verified you have to register again.</p>
+        </div>
+        """;
+
+    String formattedBody = String.format(emailBody, url, url);
+
+    emailService.sendEmail(email, "Email Verification", formattedBody);
     return ResponseEntity.ok(
       "Registration confirmation email sent successfully"
     );
+  }
+
+  @Transactional
+  @Scheduled(cron = "0 0 0 * * *")
+  public void deleteExpiredTokens() {
+    List<SecureToken> expiredTokens = secureTokenRepository
+      .findAll()
+      .stream()
+      .filter(token ->
+        token.getExpiryDate().plusDays(6).isBefore(LocalDateTime.now())
+      )
+      .toList();
+
+    expiredTokens.forEach(token -> {
+      Passenger passenger = token.getPassenger();
+      if (passenger != null) {
+        passenger.getTokens().remove(token);
+        passengerRepository.save(passenger);
+      }
+    });
+
+    secureTokenRepository.deleteAll(expiredTokens);
+  }
+
+  @Transactional
+  @Scheduled(cron = "0 0 0 * * *")
+  public void deleteUnverifiedPassengers() {
+    List<Passenger> unverifiedPassengers = passengerRepository
+      .findAll()
+      .stream()
+      .filter(passenger -> !passenger.isVerified())
+      .filter(passenger -> {
+        Optional<SecureToken> lastToken = passenger
+          .getTokens()
+          .stream()
+          .reduce((first, second) -> second);
+        return (
+          lastToken.isPresent() &&
+          lastToken
+            .get()
+            .getExpiryDate()
+            .plusDays(6)
+            .isBefore(LocalDateTime.now())
+        );
+      })
+      .toList();
+
+    passengerRepository.deleteAll(unverifiedPassengers);
   }
 
   public ResponseEntity<String> verifyPassenger(String token) {
     var secureToken = secureTokenRepository
       .findByToken(token)
       .orElseThrow(() -> new InvalidTokenException());
-    if (secureToken.getExpiryDate().isBefore(LocalDateTime.now())) {
+    var passenger = secureToken.getPassenger();
+    if (
+      secureToken.getExpiryDate().isBefore(LocalDateTime.now()) &&
+      passenger.isVerified()
+    ) {
       return ResponseEntity.ok("Token expired");
     }
-    var passenger = secureToken.getPassenger();
     passenger.setVerified(true);
     passengerRepository.save(passenger);
     return ResponseEntity.ok("Passenger verified successfully");

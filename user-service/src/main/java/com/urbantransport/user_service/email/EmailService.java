@@ -14,7 +14,7 @@ public class EmailService {
 
   private final JavaMailSender javaMailSender;
 
-  public void sendEmail(String to, String subject, String text)
+  public void sendEmail(String to, String subject, String htmlContent)
     throws MessagingException, UnsupportedEncodingException {
     MimeMessage message = javaMailSender.createMimeMessage();
 
@@ -26,8 +26,6 @@ public class EmailService {
       InternetAddress.parse(to)
     );
     message.setSubject(subject);
-
-    String htmlContent = "<h1>eTawsil Corporation</h1><p>" + text + "</p>";
     message.setContent(htmlContent, "text/html");
     javaMailSender.send(message);
   }
