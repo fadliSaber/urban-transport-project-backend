@@ -1,6 +1,5 @@
 package com.urbantransport.notification_service.service;
 
-import com.urbantransport.notification_service.entity.Notification;
 import com.urbantransport.notification_service.event.BusArrivalEvent;
 import com.urbantransport.notification_service.event.DelayNotificationEvent;
 import com.urbantransport.notification_service.event.SubscriptionSuccessEvent;
@@ -74,7 +73,7 @@ public class NotificationsService {
         System.out.println("Received DelayNotificationEvent: " + delayNotificationEvent);
 
         // Store the event as a message
-        String message = "Bus ID: " + delayNotificationEvent.getBusId() + ", Delay Reason: " + delayNotificationEvent.getDelayReason() +
+        String message = "Bus ID: " + delayNotificationEvent.getBusId()+
                 ", New ETA: " + delayNotificationEvent.getNewEta();
         synchronized (messages) {
             messages.add(message);
@@ -88,7 +87,6 @@ public class NotificationsService {
         }
     }
 
-    // Method to clear all stored messages
     public void clearMessages() {
         synchronized (messages) {
             messages.clear();
