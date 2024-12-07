@@ -21,15 +21,12 @@ public class NotificationsService {
 
     private final RedisTemplate<String, Object> redisTemplate;
 
-    // Store notifications temporarily
     private final List<String> messages = new ArrayList<>();
 
-    // Constructor to inject RedisTemplate
     public NotificationsService(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
-    // Listen to bus arrival events from Kafka topic "busArrivalTopic"
     @KafkaListener(topics = "busArrivalTopic", groupId = "notification-service-group")
     public void listenBusArrivalTopic(BusArrivalEvent busArrivalEvent) {
         System.out.println("Received BusArrivalEvent: " + busArrivalEvent);
@@ -41,7 +38,6 @@ public class NotificationsService {
         }
     }
 
-    // Listen to subscription success events from Kafka topic "subscriptionSuccessTopic"
     @KafkaListener(topics = "subscriptionSuccessTopic", groupId = "notification-service-group")
     public void listenSubscriptionSuccessTopic(SubscriptionSuccessEvent subscriptionSuccessEvent) {
         System.out.println("Received SubscriptionSuccessEvent: " + subscriptionSuccessEvent);
@@ -54,12 +50,10 @@ public class NotificationsService {
         }
     }
 
-    // Listen to ticket purchase events from Kafka topic "ticketPurchaseTopic"
     @KafkaListener(topics = "ticketPurchaseTopic", groupId = "notification-service-group")
     public void listenTicketPurchaseTopic(TicketPurchaseEvent ticketPurchaseEvent) {
         System.out.println("Received TicketPurchaseEvent: " + ticketPurchaseEvent);
 
-        // Store the event as a message
         String message = "User ID: " + ticketPurchaseEvent.getUserId() + ", Ticket ID: " + ticketPurchaseEvent.getTicketId() +
                 ", Purchase Time: " + ticketPurchaseEvent.getPurchaseTime();
         synchronized (messages) {
@@ -67,12 +61,10 @@ public class NotificationsService {
         }
     }
 
-    // Listen to delay notification events from Kafka topic "delayNotificationTopic"
     @KafkaListener(topics = "delayNotificationTopic", groupId = "notification-service-group")
     public void listenDelayNotificationTopic(DelayNotificationEvent delayNotificationEvent) {
         System.out.println("Received DelayNotificationEvent: " + delayNotificationEvent);
 
-        // Store the event as a message
         String message = "Bus ID: " + delayNotificationEvent.getBusId()+
                 ", New ETA: " + delayNotificationEvent.getNewEta();
         synchronized (messages) {
@@ -80,7 +72,6 @@ public class NotificationsService {
         }
     }
 
-    // Method to retrieve stored messages (notifications)
     public List<String> getMessages() {
         synchronized (messages) {
             return new ArrayList<>(messages);
@@ -93,11 +84,10 @@ public class NotificationsService {
         }
     }
 
-    // Optional: Method to save notifications to Redis
     public void saveNotificationToRedis(String userId, String message) {
         String key = NOTIFICATIONS_KEY_PREFIX + userId;
-        redisTemplate.opsForList().rightPush(key, message);  // Store notifications in Redis
-        redisTemplate.expire(key, 30, TimeUnit.MINUTES);  // Set an expiration time (e.g., 30 minutes)
+        redisTemplate.opsForList().rightPush(key, message);
+        redisTemplate.expire(key, 30, TimeUnit.MINUTES);
     }
 
     public List<String> getNotificationsFromRedis(String userId) {
