@@ -1,21 +1,41 @@
 package com.urbantransport.notification_service.event;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+public class BusArrivalEvent extends Event {
+    private String busId;
 
-import java.time.LocalDateTime;
-@AllArgsConstructor
-@Getter
-@Setter
-public class BusArrivalEvent {
-    private String id;
-    private String stationName;
-    private String userId;
-    private LocalDateTime arrivalTime;
+    private String arrivalTime;
+
+    private String location;
+
+
+    public BusArrivalEvent() {
+    }
+
+    public String getBusId() {
+        return busId;
+    }
+
+    public void setBusId(String busId) {
+        this.busId = busId;
+    }
+
+    public String getArrivalTime() {
+        return arrivalTime;
+    }
+
+    public void setArrivalTime(String arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
 
 }
-
 

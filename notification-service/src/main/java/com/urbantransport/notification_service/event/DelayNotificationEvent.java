@@ -1,16 +1,38 @@
 package com.urbantransport.notification_service.event;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
-@AllArgsConstructor
-@Getter
-@Setter
-public class DelayNotificationEvent {
+public class DelayNotificationEvent  {
     private String busId;
-    private String newArrivalTime;
-    private String userId;
+    private String newEta;
+    public DelayNotificationEvent(String busId, String newEta, String delayReason) {
+        this.busId = busId;
+        this.newEta = newEta;
+    }
 
+    // Getters et Setters
+    public String getBusId() {
+        return busId;
+    }
+
+    public void setBusId(String busId) {
+        this.busId = busId;
+    }
+
+    public String getNewEta() {
+        return newEta;
+    }
+
+    public void setNewEta(String newEta) {
+        this.newEta = newEta;
+    }
+
+
+    @Override
+    public String toString() {
+        return "DelayNotificationEvent{" +
+                "busId='" + busId + '\'' +
+                ", newEta='" + newEta + '\'' +
+                '}';
+    }
 }
 
