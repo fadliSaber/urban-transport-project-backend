@@ -27,7 +27,7 @@ public class NotificationsService {
         this.redisTemplate = redisTemplate;
     }
 
-    @KafkaListener(topics = "busArrivalTopic", groupId = "notification-service-group")
+    @KafkaListener(topics = "bus_arrival", groupId = "notification-service-group")
     public void listenBusArrivalTopic(BusArrivalEvent busArrivalEvent) {
         System.out.println("Received BusArrivalEvent: " + busArrivalEvent);
 
@@ -36,7 +36,7 @@ public class NotificationsService {
     }
 
 
-    @KafkaListener(topics = "subscriptionSuccessTopic", groupId = "notification-service-group")
+    @KafkaListener(topics = "subscription_success", groupId = "notification-service-group")
     public void listenSubscriptionSuccessTopic(SubscriptionSuccessEvent subscriptionSuccessEvent) {
         System.out.println("Received SubscriptionSuccessEvent: " + subscriptionSuccessEvent);
 
@@ -48,7 +48,7 @@ public class NotificationsService {
         }
     }
 
-    @KafkaListener(topics = "ticketPurchaseTopic", groupId = "notification-service-group")
+    @KafkaListener(topics = "ticket_purchase", groupId = "notification-service-group")
     public void listenTicketPurchaseTopic(TicketPurchaseEvent ticketPurchaseEvent) {
         System.out.println("Received TicketPurchaseEvent: " + ticketPurchaseEvent);
 
@@ -60,7 +60,7 @@ public class NotificationsService {
         saveNotificationToRedis(ticketPurchaseEvent.getUserId(), message);
     }
 
-    @KafkaListener(topics = "delayNotificationTopic", groupId = "notification-service-group")
+    @KafkaListener(topics = "delay_notification", groupId = "notification-service-group")
     public void listenDelayNotificationTopic(DelayNotificationEvent delayNotificationEvent) {
         System.out.println("Received DelayNotificationEvent: " + delayNotificationEvent);
 
