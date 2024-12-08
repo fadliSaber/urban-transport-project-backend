@@ -31,12 +31,10 @@ public class NotificationsService {
     public void listenBusArrivalTopic(BusArrivalEvent busArrivalEvent) {
         System.out.println("Received BusArrivalEvent: " + busArrivalEvent);
 
-        // Store the event as a message
         String message = "Bus ID: " + busArrivalEvent.getBusId() + ", Arrival Time: " + busArrivalEvent.getArrivalTime();
-        synchronized (messages) {
-            messages.add(message);
-        }
+        saveNotificationToRedis(busArrivalEvent.getUserId(), message);
     }
+
 
     @KafkaListener(topics = "subscriptionSuccessTopic", groupId = "notification-service-group")
     public void listenSubscriptionSuccessTopic(SubscriptionSuccessEvent subscriptionSuccessEvent) {
@@ -59,17 +57,19 @@ public class NotificationsService {
         synchronized (messages) {
             messages.add(message);
         }
+        saveNotificationToRedis(ticketPurchaseEvent.getUserId(), message);
     }
 
     @KafkaListener(topics = "delayNotificationTopic", groupId = "notification-service-group")
     public void listenDelayNotificationTopic(DelayNotificationEvent delayNotificationEvent) {
         System.out.println("Received DelayNotificationEvent: " + delayNotificationEvent);
 
-        String message = "Bus ID: " + delayNotificationEvent.getBusId()+
+        String message = "Bus ID: " + delayNotificationEvent.getBusId() +
                 ", New ETA: " + delayNotificationEvent.getNewEta();
         synchronized (messages) {
             messages.add(message);
         }
+        saveNotificationToRedis(delayNotificationEvent.getUserId(), message);
     }
 
     public List<String> getMessages() {
@@ -88,6 +88,8 @@ public class NotificationsService {
         String key = NOTIFICATIONS_KEY_PREFIX + userId;
         redisTemplate.opsForList().rightPush(key, message);
         redisTemplate.expire(key, 30, TimeUnit.MINUTES);
+
+        System.out.println("Saved message to Redis: Key = " + key + ", Message = " + message);
     }
 
     public List<String> getNotificationsFromRedis(String userId) {
