@@ -21,10 +21,11 @@ public class NotificationsController {
      * Endpoint to get all in-memory messages.
      * @return List of messages.
      */
-    @GetMapping("/messages")
-    public ResponseEntity<List<String>> getMessages() {
-        List<String> messages = notificationsService.getMessages();
-        return ResponseEntity.ok(messages);
+    @GetMapping("/api/notifications/messages/{userId}")
+    public List<String> getNotifications(@PathVariable String userId) {
+        List<String> notifications = notificationsService.getNotificationsFromRedis(userId);
+        System.out.println("Retrieved notifications: " + notifications);
+        return notifications;
     }
 
     /**

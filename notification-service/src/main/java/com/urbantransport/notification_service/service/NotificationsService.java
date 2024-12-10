@@ -95,17 +95,21 @@ public class NotificationsService {
     public List<String> getNotificationsFromRedis(String userId) {
         String key = NOTIFICATIONS_KEY_PREFIX + userId;
 
-        List<Object> rawMessages = redisTemplate.opsForList().range(key, 0, -1); // Retrieve all notifications for the user
+        List<Object> rawMessages = redisTemplate.opsForList().range(key, 0, -1);
         List<String> messages = new ArrayList<>();
 
         if (rawMessages != null) {
+            System.out.println("Fetched " + rawMessages.size() + " messages from Redis for user: " + userId); // Debugging log
             for (Object message : rawMessages) {
                 if (message instanceof String) {
-                    messages.add((String) message);  // Cast the Object to String
+                    messages.add((String) message);
                 }
             }
+        } else {
+            System.out.println("No messages found in Redis for user: " + userId);
         }
 
         return messages;
     }
+
 }
