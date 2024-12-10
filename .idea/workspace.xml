@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42f71600-617a-47f4-b82e-5b9ab73aa07e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/messaging-service" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/messaging-service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/notification-service/src/main/java/com/urbantransport/notification_service/event/BusArrivalEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/notification-service/src/main/java/com/urbantransport/notification_service/event/DelayNotificationEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/notification-service/src/main/java/com/urbantransport/notification_service/event/Event.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/notification-service/src/main/java/com/urbantransport/notification_service/event/RegistrationSuccessEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/notification-service/src/main/java/com/urbantransport/notification_service/event/RouteChangeEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/notification-service/src/main/java/com/urbantransport/notification_service/event/SubscriptionSuccessEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/notification-service/src/main/java/com/urbantransport/notification_service/event/TicketPurchaseEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/messaging-service/README.md" beforeDir="false" />
+    <list default="true" id="42f71600-617a-47f4-b82e-5b9ab73aa07e" name="Changes" comment="feat:Add Kafka message converter to handle JSON deserialization">
+      <change beforePath="$PROJECT_DIR$/messaging-service" beforeDir="false" afterPath="$PROJECT_DIR$/messaging-service" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +35,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="Notification-service" />
         <entry key="$PROJECT_DIR$/messaging-service" value="master" />
       </map>
     </option>
@@ -71,7 +61,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Notification-service",
+    "git-widget-placeholder": "messaging-service",
     "last_opened_file_path": "D:/Urban-Transport-Project",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -128,8 +118,17 @@
       <workItem from="1733062119095" duration="589000" />
       <workItem from="1733138579960" duration="598000" />
       <workItem from="1733324750270" duration="550000" />
-      <workItem from="1733859873277" duration="1480000" />
+      <workItem from="1733859873277" duration="1789000" />
     </task>
+    <task id="LOCAL-00001" summary="feat:Add Kafka message converter to handle JSON deserialization">
+      <option name="closed" value="true" />
+      <created>1733861591853</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733861591853</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,5 +144,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat:Add Kafka message converter to handle JSON deserialization" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat:Add Kafka message converter to handle JSON deserialization" />
   </component>
 </project>
