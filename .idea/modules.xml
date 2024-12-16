@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Urban-Transport-Project.iml" filepath="$PROJECT_DIR$/.idea/Urban-Transport-Project.iml" />
-      <module fileurl="file://$PROJECT_DIR$/geolocalisation-service/geolocalisation-service.iml" filepath="$PROJECT_DIR$/geolocalisation-service/geolocalisation-service.iml" />
     </modules>
   </component>
 </project>

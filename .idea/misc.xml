@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/subscription-service/pom.xml" />
         <option value="$PROJECT_DIR$/route-schedule-service/pom.xml" />
         <option value="$PROJECT_DIR$/geolocalisation-service/pom.xml" />
+        <option value="$PROJECT_DIR$/messaging-service/pom.xml" />
       </list>
     </option>
   </component>
