@@ -4,113 +4,48 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="42f71600-617a-47f4-b82e-5b9ab73aa07e" name="Changes" comment="fix:Refactor Kafka Consumer Service to Deserialize JSON Messages into Objects">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="13159f48-0c1c-4037-b937-114a41179151" name="Changes" comment="fix:clean up">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notification-service/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/docker-compose.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notification-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/notification-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notification-service/src/test/java/com/urbantransport/notification_service/NotificationServiceApplicationTests.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <favorite-branches>
-      <branch-storage>
-        <map>
-          <entry type="LOCAL">
-            <value>
-              <list>
-                <branch-info repo="$PROJECT_DIR$" source="Abonnement&amp;Notification-services" />
-              </list>
-            </value>
-          </entry>
-        </map>
-      </branch-storage>
-    </favorite-branches>
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="Notification-service" />
-        <entry key="$PROJECT_DIR$/messaging-service" value="master" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 3
-}</component>
-  <component name="ProjectId" id="2neVqpDb8BXNmjZNjGLMY0geoXI" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2qLBnuru2Y31rrE3FYe6XEAcd1u" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;messaging-service&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/urban-transport-project-backend/messaging-service&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15625&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.3105446&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "messaging-service",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunAnythingCache">
-    <option name="myCommands">
-      <command value="mvn install" />
-      <command value="mvn clean" />
-    </option>
-  </component>
-  <component name="RunManager" selected="Spring Boot.NotificationServiceApplication">
-    <configuration name="MessagingServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.urbantransport.messaging_service.MessagingServiceApplication" />
-      <module name="Urban-Transport-Project" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.urbantransport.messaging_service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+}]]></component>
+  <component name="RunManager" selected="Spring Boot.GeolocalisationServiceApplication">
     <configuration name="GeolocalisationServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="geolocalisation-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.urbantransport.geolocalisation_service.GeolocalisationServiceApplication" />
@@ -160,112 +95,35 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
-      <deployment type="docker-compose.yml">
-        <settings />
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="subscription-service/compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="subscription-service/compose.yaml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.MessagingServiceApplication" />
-        <item itemvalue="Docker.subscription-service/compose.yaml: Compose Deployment" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="42f71600-617a-47f4-b82e-5b9ab73aa07e" name="Changes" comment="" />
-      <created>1729333721633</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1729333721633</updated>
-      <workItem from="1729333722831" duration="3632000" />
-      <workItem from="1729338368355" duration="1646000" />
-      <workItem from="1729341084096" duration="2605000" />
-      <workItem from="1730128862971" duration="2224000" />
-      <workItem from="1732138081454" duration="163000" />
-      <workItem from="1732998855103" duration="160000" />
-      <workItem from="1733058955133" duration="131000" />
-      <workItem from="1733059100485" duration="51000" />
-      <workItem from="1733059179225" duration="49000" />
-      <workItem from="1733059252444" duration="231000" />
-      <workItem from="1733059534199" duration="49000" />
-      <workItem from="1733059622232" duration="1250000" />
-      <workItem from="1733062119095" duration="589000" />
-      <workItem from="1733138579960" duration="598000" />
-      <workItem from="1733324750270" duration="550000" />
-      <workItem from="1733859873277" duration="1789000" />
-      <workItem from="1734429344895" duration="914000" />
-      <workItem from="1734430398411" duration="673000" />
-    </task>
-    <task id="LOCAL-00001" summary="feat:Add Kafka message converter to handle JSON deserialization">
+    <task id="LOCAL-00001" summary="fix:clean up">
       <option name="closed" value="true" />
-      <created>1733861591853</created>
+      <created>1734431751428</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1733861591853</updated>
+      <updated>1734431751429</updated>
     </task>
-    <task id="LOCAL-00002" summary="fix:Refactor Kafka Consumer Service to Deserialize JSON Messages into Objects">
-      <option name="closed" value="true" />
-      <created>1734361433647</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1734361433648</updated>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="13159f48-0c1c-4037-b937-114a41179151" name="Changes" comment="fix:clean up" />
+      <created>1734432151654</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1734432151654</updated>
+      <workItem from="1734432156410" duration="394000" />
     </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat:Add Kafka message converter to handle JSON deserialization" />
-    <MESSAGE value="fix:Refactor Kafka Consumer Service to Deserialize JSON Messages into Objects" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix:Refactor Kafka Consumer Service to Deserialize JSON Messages into Objects" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/messaging-service/src/main/java/com/urbantransport/messaging_service/MessagingServiceApplication.java</url>
-          <line>6</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/messaging-service/src/main/java/com/urbantransport/messaging_service/config/KafkaConsumerConfig.java</url>
-          <line>51</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/notification-service/src/main/java/com/urbantransport/notification_service/NotificationServiceApplication.java</url>
-          <line>6</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="fix:add test dependencies" />
+    <MESSAGE value="fix:clean up" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix:clean up" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/urban_transport_project_backend$NotificationServiceApplication.ic" NAME="NotificationServiceApplication Coverage Results" MODIFIED="1734429703142" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
