@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.UUID;
 @Service
 public interface SubscriptionService {
-     void subscribe(Subscription newsubscription);
+     Subscription subscribe(Subscription newsubscription);
      List<Subscription> getAllSubscriptions();
      void deleteSubscription(UUID id);
      Subscription updateSubscription(

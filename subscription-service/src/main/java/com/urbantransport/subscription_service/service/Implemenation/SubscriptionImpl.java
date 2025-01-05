@@ -2,7 +2,6 @@ package com.urbantransport.subscription_service.service.Implemenation;
 
 import com.urbantransport.subscription_service.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.urbantransport.subscription_service.entity.Subscription;
 import com.urbantransport.subscription_service.repository.SubscriptionRepository;
 import com.urbantransport.subscription_service.service.SubscriptionService;
@@ -22,9 +21,10 @@ public class SubscriptionImpl implements SubscriptionService {
     }
 
     @Override
-    public void subscribe(Subscription newsubscription) {
+    public Subscription subscribe(Subscription newsubscription) {
         repository.save(newsubscription);
 
+        return newsubscription;
     }
 
     @Override
