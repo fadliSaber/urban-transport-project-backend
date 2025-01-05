@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: route-schedule-service
+  cassandra:
+    contact-points: localhost
+    port: 9042 
+    schema-action: CREATE_IF_NOT_EXISTS
+    request:
+      timeout: 10s
+    connection:
+      connect-timeout: 10s
+      init-query-timeout: 10s
+    local-datacenter: datacenter-1
+    keyspace-name: route_schedule
