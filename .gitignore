@@ -1,5 +1,6 @@
 ### Environment ###
 .env
+.idea
 
 ### Vscode ###
 .vscode
