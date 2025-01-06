@@ -9,7 +9,7 @@ spring:
     datasource:
         url: jdbc:postgresql://localhost:5432/tickets-db
         username: postgres
-        password: ${DB_PASSWORD}
+        password: 1234
         driverClassName: org.postgresql.Driver
         hikari:
             data-source-properties:
@@ -24,5 +24,5 @@ spring:
             show-sql: true
 
 stripe:
-    secret-key: ${STRIPE_SECRET_KEY}
-    public-key: ${STRIPE_PUBLIC_KEY}
+    secret-key: sk_test_51QMABUDWNHvbLqXJvRxzUzndzmYbNtH1ZHZDPqbznR4YjeKh3FhS2F7VyjWSUSMVOqwmXMQBiyQ4lawmWOrWdr7x00B3cglai7
+    public-key: pk_test_51QMABUDWNHvbLqXJe3m9BOu3Do83g4SfF0nGq3oWs2WNkgfW5RtGb6mzxcnPbygRp9HWLOjZ7W156EJ7TbYX2mfx00de2cOkBt

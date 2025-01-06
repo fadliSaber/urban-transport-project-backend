@@ -1,0 +1,98 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: geolocalisation-service
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: geolocation-service
+  namespace: geolocalisation-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: geolocation-service
+  template:
+    metadata:
+      labels:
+        app: geolocation-service
+    spec:
+      containers:
+        - name: geolocation-service
+          image: ritasensei/geolocalisation-service:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SPRING_REDIS_HOST
+              value: redis
+            - name: SPRING_REDIS_PORT
+              value: "6379"
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: geolocation-service
+  namespace: geolocalisation-service
+spec:
+  selector:
+    app: geolocation-service
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: geolocalisation-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:latest
+          ports:
+            - containerPort: 8000
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: geolocalisation-service
+spec:
+  selector:
+    app: redis
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: ClusterIP
+
