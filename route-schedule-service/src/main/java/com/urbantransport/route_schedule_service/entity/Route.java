@@ -14,8 +14,9 @@ public class Route {
 
     @Id
     private UUID id = UUID.randomUUID();
-    private String origin;
-    private String destination;
-    public List<UUID> stop_ids;
-    private int distance;
+    private String routeNumber;
+    private String routeName;
+    public List<UUID> stopIds;
+    private int frequency;
+    private int duration;
 }

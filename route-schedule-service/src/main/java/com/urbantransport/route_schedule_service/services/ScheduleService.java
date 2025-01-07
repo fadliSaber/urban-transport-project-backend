@@ -28,8 +28,8 @@ public class ScheduleService {
     public void updateTimes(UUID scheduleId, LocalDateTime departure, LocalDateTime arrival) {
         Schedule selectedSchedule = scheduleRepo.findById(scheduleId).orElse(null);
         if(selectedSchedule != null) {
-            selectedSchedule.setDeparture(departure);
-            selectedSchedule.setArrival(arrival);
+            selectedSchedule.setDepartureTime(departure);
+            selectedSchedule.setArrivalTime(arrival);
             scheduleRepo.save(selectedSchedule);
         }
     }
@@ -37,7 +37,7 @@ public class ScheduleService {
     public void updateRoute(UUID scheduleId, UUID routeId) {
         Schedule selectedSchedule = scheduleRepo.findById(scheduleId).orElse(null);
         if(selectedSchedule != null) {
-            selectedSchedule.setRoute_id(routeId);
+            selectedSchedule.setRouteId(routeId);
             scheduleRepo.save(selectedSchedule);
         }
     }

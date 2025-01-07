@@ -14,5 +14,6 @@ public class Stop {
     @Id
     private UUID id = UUID.randomUUID();
     private String name;
-    private String location;
+    private float lat;
+    private float lng;
 }

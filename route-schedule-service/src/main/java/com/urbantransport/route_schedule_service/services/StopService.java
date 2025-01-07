@@ -1,5 +1,6 @@
 package com.urbantransport.route_schedule_service.services;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,10 @@ public class StopService {
     @Autowired
     private StopRepository stopRepo;
 
+
+    public List<Stop> getAll() {
+        return stopRepo.findAll();
+    }
     public Stop getStop(UUID stopId) {
         Stop selectedStop = stopRepo.findById(stopId).orElse(null);
         if(selectedStop != null) {
@@ -28,11 +33,16 @@ public class StopService {
     }
 
 
-    public void setLocation(UUID stopId, String location) {
+    public void setLocation(UUID stopId, int lat, int lng) {
         Stop selectedStop = stopRepo.findById(stopId).orElse(null);
         if(selectedStop != null) {
-            selectedStop.setLocation(location);
+            selectedStop.setLat(lat);
+            selectedStop.setLng(lng);
             stopRepo.save(selectedStop);
         }
+    }
+
+    public List<Stop> findStopsByIds(List<UUID> stopIds) {
+        return stopRepo.findAllById(stopIds);
     }
 }

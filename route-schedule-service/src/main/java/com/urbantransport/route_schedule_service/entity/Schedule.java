@@ -15,7 +15,7 @@ public class Schedule {
 
     @Id
     private UUID id = UUID.randomUUID();
-    private UUID route_id;
-    private LocalDateTime departure;
-    private LocalDateTime arrival;
+    private UUID routeId;
+    private LocalDateTime departureTime;
+    private LocalDateTime arrivalTime;
 }
